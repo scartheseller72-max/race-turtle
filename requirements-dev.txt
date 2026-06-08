@@ -1,0 +1,7 @@
+# Development dependencies. Install with:  pip install -r requirements-dev.txt
+# (or, preferably:  pip install -e ".[dev]")
+pytest>=7.0
+pytest-cov>=4.0
+ruff>=0.4
+mypy>=1.8
+pre-commit>=3.5

@@ -1,0 +1,82 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "race-turtle"
+version = "1.0.0"
+description = "A friendly turtle racing game — bet on a colour and watch them race."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+keywords = ["turtle", "game", "education", "beginner", "race"]
+authors = [{ name = "R-Htu" }]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: X11 Applications",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Games/Entertainment",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/R-Htu/race-turtle"
+Repository = "https://github.com/R-Htu/race-turtle"
+Issues = "https://github.com/R-Htu/race-turtle/issues"
+
+[project.scripts]
+race-turtle = "race_turtle.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov>=4.0", "ruff>=0.4", "mypy>=1.8", "pre-commit>=3.5"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+addopts = "-ra"
+pythonpath = ["src"]
+
+[tool.coverage.run]
+branch = true
+source = ["race_turtle"]
+omit = ["src/race_turtle/game.py"]  # GUI layer requires a display; excluded from coverage gates
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.9"
+files = ["src"]
+strict = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+# The turtle GUI layer has no usable upstream type stubs; type-checking it adds
+# noise without value. Its pure logic lives in the engine, which IS strictly
+# typed and tested.
+[[tool.mypy.overrides]]
+module = ["turtle"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["race_turtle.game"]
+ignore_errors = true

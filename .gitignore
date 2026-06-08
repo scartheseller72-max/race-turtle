@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / cache
+__pycache__/
+*.py[cod]
+*$py.class
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Virtual environments  (the original repo committed venv/ — never again)
+.venv/
+venv/
+env/
+ENV/
+
+# Build / distribution
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# IDE / editor  (the original repo committed .idea/)
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
